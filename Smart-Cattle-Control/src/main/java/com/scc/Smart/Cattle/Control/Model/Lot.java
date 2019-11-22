@@ -19,7 +19,7 @@ public class Lot {
 	@NotNull
 	private String description;
 	
-	@OneToMany(mappedBy = "bull") 
+	@OneToMany(mappedBy = "lot") 
 	private List<Bull> bulls;
 
 	public Long getId() {
