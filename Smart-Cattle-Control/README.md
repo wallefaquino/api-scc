@@ -1,1 +1,1 @@
-Smart-Cattle-CONTROL
+Smart-Cattle-Control
