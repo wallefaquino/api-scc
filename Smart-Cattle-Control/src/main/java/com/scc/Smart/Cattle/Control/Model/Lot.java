@@ -1,11 +1,13 @@
 package com.scc.Smart.Cattle.Control.Model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +24,11 @@ public class Lot {
 	@NotNull
 	private String status;
 	
-	@OneToMany(mappedBy = "lot") 
+	@NotNull
+	private LocalDateTime entry_date;
+	
+	@OneToMany
+	@JoinColumn(name = "lot_id")
 	private List<Bull> bulls;
 
 	public Long getId() {
@@ -47,6 +53,14 @@ public class Lot {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public LocalDateTime getEntry_date() {
+		return entry_date;
+	}
+
+	public void setEntry_date(LocalDateTime entry_date) {
+		this.entry_date = entry_date;
 	}
 
 	public List<Bull> getBulls() {

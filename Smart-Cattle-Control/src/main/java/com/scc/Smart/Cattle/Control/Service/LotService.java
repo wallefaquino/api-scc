@@ -20,52 +20,88 @@ public class LotService {
 
 	@Autowired
 	private LotRepository repository;
-	
+
 	@Autowired
 	private BullService bullService;
-	
+
 	public List<Lot> findAll() {
-		return repository.findAll();
+
+		try {
+			return repository.findAll();
+		} catch (RuntimeException e) {
+			throw new BadRequestException(e.getMessage());
+		}
+
 	}
-	
+
 	public Lot findById(Long id) {
-		Lot lot = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
-		
+		Lot lot = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
+
 		return lot;
 	}
-	
+
 	@Transactional
-	public void save(Lot newLot) {
+	public Lot save(Lot newLot) {
 		try {
 			newLot.setBulls(new ArrayList<Bull>());
-			
+
 			repository.save(newLot);
-		}catch (RuntimeException e) {
+			return newLot;
+		} catch (RuntimeException e) {
 			throw new BadRequestException(e.getMessage());
 		}
 	}
-	
+
 	@Transactional
 	public void delete(Long id) {
-		Lot lot = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
-		
-		repository.deleteById(lot.getId());
+		Lot lot = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
+
+		try {
+			repository.deleteById(lot.getId());
+		} catch (Exception e) {
+			throw new BadRequestException(e.getMessage());
+		}
+
 	}
-	
+
 	@Transactional
 	public Lot update(Long id, Lot currentLot) {
 		Lot oldLot = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
 		
-		BeanUtils.copyProperties(currentLot, oldLot, "id");
-		repository.save(currentLot);
-		
-		return currentLot;
-	}	
-	
+		try {
+			
+				BeanUtils.copyProperties(currentLot, oldLot, "id");
+				repository.save(currentLot);
+				
+				return currentLot;	
+		}catch (RuntimeException e) {
+			throw new BadRequestException(e.getMessage());
+		}
+
+	}
+
 	@Transactional
-	public void addBull(Long idLot, Long idBull) {
-		Lot lot = repository.findById(idLot).orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + idLot));
-		
-		lot.getBulls().add(bullService.findById(idBull));
+	public void addBull(Long id, Bull bull) {
+		Lot lot = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
+
+		try {
+
+			Bull newBull = new Bull();
+
+			newBull.setBreed(bull.getBreed());
+			newBull.setInput_weight(bull.getInput_weight());
+			newBull.setCurrent_weight(bull.getCurrent_weight());
+			bullService.save(newBull);
+
+			lot.getBulls().add(newBull);
+
+			repository.save(lot);
+		} catch (RuntimeException e) {
+			throw new BadRequestException(e.getMessage());
+		}
+
 	}
 }

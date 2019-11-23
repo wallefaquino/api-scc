@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -23,11 +21,7 @@ public class Bull {
 	
 	@NotNull
 	private double current_weight;
-	
-	@ManyToOne
-	@JoinColumn(name = "lot_id", nullable = false)
-	private Lot lot;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -59,4 +53,5 @@ public class Bull {
 	public void setCurrent_weight(double current_weight) {
 		this.current_weight = current_weight;
 	}	
+		
 }
