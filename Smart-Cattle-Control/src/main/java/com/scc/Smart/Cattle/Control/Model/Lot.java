@@ -19,6 +19,9 @@ public class Lot {
 	@NotNull
 	private String description;
 	
+	@NotNull
+	private String status;
+	
 	@OneToMany(mappedBy = "lot") 
 	private List<Bull> bulls;
 
@@ -36,6 +39,14 @@ public class Lot {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public List<Bull> getBulls() {
