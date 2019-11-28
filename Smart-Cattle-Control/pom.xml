@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.scc</groupId>
-	<artifactId>Smart-Cattle-Control</artifactId>
+	<artifactId>smart-cattle-control</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Smart-Cattle-Control</name>
 	<description>Demo project for Spring Boot</description>
@@ -44,6 +44,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>		
 	</dependencies>
 
 	<build>
