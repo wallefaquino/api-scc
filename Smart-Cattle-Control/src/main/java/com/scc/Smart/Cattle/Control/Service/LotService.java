@@ -13,6 +13,7 @@ import com.scc.Smart.Cattle.Control.Exception.BadRequestException;
 import com.scc.Smart.Cattle.Control.Exception.ResourceNotFoundException;
 import com.scc.Smart.Cattle.Control.Model.Bull;
 import com.scc.Smart.Cattle.Control.Model.Lot;
+import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
 import com.scc.Smart.Cattle.Control.Repository.LotRepository;
 
 @Service
@@ -23,6 +24,8 @@ public class LotService {
 
 	@Autowired
 	private BullService bullService;
+
+	private double bulls_weight;
 
 	public List<Lot> findAll() {
 
@@ -68,15 +71,16 @@ public class LotService {
 
 	@Transactional
 	public Lot update(Long id, Lot currentLot) {
-		Lot oldLot = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
-		
+		Lot oldLot = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
+
 		try {
-			
-				BeanUtils.copyProperties(currentLot, oldLot, "id");
-				repository.save(currentLot);
-				
-				return currentLot;	
-		}catch (RuntimeException e) {
+
+			BeanUtils.copyProperties(currentLot, oldLot, "id");
+			repository.save(currentLot);
+
+			return currentLot;
+		} catch (RuntimeException e) {
 			throw new BadRequestException(e.getMessage());
 		}
 
@@ -103,5 +107,31 @@ public class LotService {
 			throw new BadRequestException(e.getMessage());
 		}
 
+	}
+
+	public List<Lot> findByStatus(String status) {
+		try {
+			return repository.findByStatus(status);
+		} catch (Exception e) {
+			throw new BadRequestException(e.getMessage());
+		}
+	}
+
+	public WeightDTO findTotalWeight(Long id) {
+		try {
+			List<Bull> bulls = bullService.findAll();
+
+			bulls_weight = 0;
+
+			bulls.forEach(bull -> {
+				bulls_weight = bulls_weight + bull.getCurrent_weight();
+			});
+
+			WeightDTO dto = new WeightDTO(bulls_weight);
+
+			return dto;
+		} catch (Exception e) {
+			throw new BadRequestException(e.getMessage());
+		}
 	}
 }
