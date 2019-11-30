@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scc.Smart.Cattle.Control.Model.Bull;
 import com.scc.Smart.Cattle.Control.Model.Lot;
+import com.scc.Smart.Cattle.Control.Model.DTO.QuotationDTO;
 import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
 import com.scc.Smart.Cattle.Control.Service.LotService;
 
@@ -59,7 +60,6 @@ public class LotController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public void addBull(@PathVariable Long id, @RequestBody Bull bull) {
 		service.addBull(id, bull);
-
 	}
 	
 	@GetMapping("/lots/{id}/bulls/weight")
@@ -70,5 +70,10 @@ public class LotController {
 	@GetMapping("/lots/")
 	public ResponseEntity<List<Lot>> findByStatus(@RequestParam("status") String status) {
 		return ResponseEntity.ok(service.findByStatus(status));
+	}
+	
+	@GetMapping("/lots/{id}/quotation")
+	public ResponseEntity<QuotationDTO> calculateQuotation(@PathVariable Long id) {
+		return ResponseEntity.ok(service.calculateQuotation(id));
 	}
 }

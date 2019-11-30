@@ -8,11 +8,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.scc.Smart.Cattle.Control.Exception.BadRequestException;
 import com.scc.Smart.Cattle.Control.Exception.ResourceNotFoundException;
 import com.scc.Smart.Cattle.Control.Model.Bull;
 import com.scc.Smart.Cattle.Control.Model.Lot;
+import com.scc.Smart.Cattle.Control.Model.DTO.QuotationDTO;
 import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
 import com.scc.Smart.Cattle.Control.Repository.LotRepository;
 
@@ -25,7 +27,11 @@ public class LotService {
 	@Autowired
 	private BullService bullService;
 
+	private RestTemplate restTemplate = new RestTemplate();
+
 	private double bulls_weight;
+
+	private static final String url = "http://127.0.0.1:5001/wsconsultoria/v1/cotacoes/boigordo";
 
 	public List<Lot> findAll() {
 
@@ -119,7 +125,10 @@ public class LotService {
 
 	public WeightDTO findTotalWeight(Long id) {
 		try {
-			List<Bull> bulls = bullService.findAll();
+			Lot lot = repository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("Lot not found with id: " + id));
+
+			List<Bull> bulls = lot.getBulls();
 
 			bulls_weight = 0;
 
@@ -130,6 +139,30 @@ public class LotService {
 			WeightDTO dto = new WeightDTO(bulls_weight);
 
 			return dto;
+		} catch (Exception e) {
+			throw new BadRequestException(e.getMessage());
+		}
+	}
+
+	public QuotationDTO calculateQuotation(Long id) {
+		try {
+			WeightDTO weightDTO = findTotalWeight(id);
+
+			double weight_in_arroba = weightDTO.getWeight() / 30;
+
+			double sale_value = retrieveQuotation() * weight_in_arroba;
+
+			return new QuotationDTO("Quotation of sales value, approximately", sale_value);
+		} catch (Exception e) {
+			throw new BadRequestException(e.getMessage());
+		}
+	}
+
+	public double retrieveQuotation() {
+		try {
+			QuotationDTO quotation = restTemplate.getForObject(url, QuotationDTO.class);
+
+			return quotation.getQuotation_value();
 		} catch (Exception e) {
 			throw new BadRequestException(e.getMessage());
 		}
