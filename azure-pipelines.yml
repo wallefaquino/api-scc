@@ -10,8 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: mvn test
-  displayName: 'Run tests'
 - script: mvn package
   displayName: 'Build .jar'
 
