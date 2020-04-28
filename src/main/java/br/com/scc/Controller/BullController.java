@@ -1,4 +1,4 @@
-package com.scc.Smart.Cattle.Control.Controller;
+package br.com.scc.Controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scc.Smart.Cattle.Control.Model.Bull;
-import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
-import com.scc.Smart.Cattle.Control.Service.BullService;
+import br.com.scc.Model.Bull;
+import br.com.scc.Model.DTO.WeightDTO;
+import br.com.scc.Service.BullService;
 
 @RestController
 @RequestMapping("/scc/v1")

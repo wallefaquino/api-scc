@@ -1,4 +1,4 @@
-package com.scc.Smart.Cattle.Control.Model;
+package br.com.scc.Model;
 
 import java.time.LocalDateTime;
 import java.util.List;

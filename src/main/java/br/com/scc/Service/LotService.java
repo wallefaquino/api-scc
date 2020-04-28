@@ -1,22 +1,22 @@
-package com.scc.Smart.Cattle.Control.Service;
+package br.com.scc.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import br.com.scc.Exception.BadRequestException;
+import br.com.scc.Exception.ResourceNotFoundException;
+import br.com.scc.Model.DTO.WeightDTO;
+import br.com.scc.Repository.LotRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.scc.Smart.Cattle.Control.Exception.BadRequestException;
-import com.scc.Smart.Cattle.Control.Exception.ResourceNotFoundException;
-import com.scc.Smart.Cattle.Control.Model.Bull;
-import com.scc.Smart.Cattle.Control.Model.Lot;
-import com.scc.Smart.Cattle.Control.Model.DTO.QuotationDTO;
-import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
-import com.scc.Smart.Cattle.Control.Repository.LotRepository;
+import br.com.scc.Model.Bull;
+import br.com.scc.Model.Lot;
+import br.com.scc.Model.DTO.QuotationDTO;
 
 @Service
 public class LotService {
