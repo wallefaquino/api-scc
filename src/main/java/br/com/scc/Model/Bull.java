@@ -1,4 +1,4 @@
-package br.com.scc.Model;
+package br.com.scc.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

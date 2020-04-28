@@ -1,4 +1,4 @@
-package br.com.scc.Service;
+package br.com.scc.service;
 
 import java.util.ArrayList;
 import java.util.List;

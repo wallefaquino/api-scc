@@ -1,4 +1,4 @@
-package br.com.scc.Controller;
+package br.com.scc.controller;
 
 import java.util.List;
 

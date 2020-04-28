@@ -1,4 +1,4 @@
-package br.com.scc.Repository;
+package br.com.scc.repository;
 
 import java.util.List;
 
