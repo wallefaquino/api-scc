@@ -1,19 +1,19 @@
-package com.scc.Smart.Cattle.Control.Service;
+package br.com.scc.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import br.com.scc.Exception.BadRequestException;
+import br.com.scc.Repository.BullRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.scc.Smart.Cattle.Control.Exception.BadRequestException;
-import com.scc.Smart.Cattle.Control.Exception.ResourceNotFoundException;
-import com.scc.Smart.Cattle.Control.Model.Bull;
-import com.scc.Smart.Cattle.Control.Model.DTO.WeightDTO;
-import com.scc.Smart.Cattle.Control.Repository.BullRepository;
+import br.com.scc.Exception.ResourceNotFoundException;
+import br.com.scc.Model.Bull;
+import br.com.scc.dto.WeightDTO;
 
 @Service
 public class BullService {

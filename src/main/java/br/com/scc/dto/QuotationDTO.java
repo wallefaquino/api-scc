@@ -1,4 +1,4 @@
-package com.scc.Smart.Cattle.Control.Model.DTO;
+package br.com.scc.dto;
 
 import java.io.Serializable;
 

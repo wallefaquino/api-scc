@@ -1,4 +1,4 @@
-package com.scc.Smart.Cattle.Control.Exception;
+package br.com.scc.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

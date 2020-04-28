@@ -1,4 +1,4 @@
-package com.scc.Smart.Cattle.Control.Repository;
+package br.com.scc.Repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.scc.Smart.Cattle.Control.Model.Lot;
+import br.com.scc.Model.Lot;
 
 @Repository
 public interface LotRepository extends JpaRepository<Lot, Long> {
