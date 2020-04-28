@@ -1,4 +1,4 @@
-package br.com.scc.Model.DTO;
+package br.com.scc.dto;
 
 import java.io.Serializable;
 

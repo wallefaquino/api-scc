@@ -1,4 +1,4 @@
-package br.com.scc.Model.DTO;
+package br.com.scc.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

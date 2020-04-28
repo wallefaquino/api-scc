@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.scc.Exception.ResourceNotFoundException;
 import br.com.scc.Model.Bull;
-import br.com.scc.Model.DTO.WeightDTO;
+import br.com.scc.dto.WeightDTO;
 
 @Service
 public class BullService {

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.scc.Model.Bull;
-import br.com.scc.Model.DTO.WeightDTO;
+import br.com.scc.dto.WeightDTO;
 import br.com.scc.Service.BullService;
 
 @RestController

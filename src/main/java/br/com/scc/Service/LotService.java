@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import br.com.scc.Exception.BadRequestException;
 import br.com.scc.Exception.ResourceNotFoundException;
-import br.com.scc.Model.DTO.WeightDTO;
+import br.com.scc.dto.WeightDTO;
 import br.com.scc.Repository.LotRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.scc.Model.Bull;
 import br.com.scc.Model.Lot;
-import br.com.scc.Model.DTO.QuotationDTO;
+import br.com.scc.dto.QuotationDTO;
 
 @Service
 public class LotService {
